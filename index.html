@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hwang Minhyun | Special Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #31103f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .orb {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+        }
+        .orb-1 { background: #818cf8; top: 10%; left: 15%; }
+        .orb-2 { background: #f43f5e; bottom: 10%; right: 15%; animation-delay: 5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        .glass-container {
+            width: 100%;
+            max-width: 850px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile-img-box {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .profile-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-header p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .content-body {
+            padding: 35px 30px;
+            min-height: 320px;
+        }
+
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2.section-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 20px;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .info-card span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #818cf8;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .movie-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 1;
+        }
+
+        .movie-info h3 {
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .movie-info p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden;
+            height: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .hobby-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hobby-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 20px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .hobby-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .hobby-icon {
+            font-size: 1.3rem;
+            background: rgba(99, 102, 241, 0.15);
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hobby-details h3 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+
+        .hobby-details p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.75rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @media(max-width: 600px) {
+            .glass-container {
+                margin: 10px;
+                border-radius: 18px;
+            }
+            .content-body {
+                padding: 20px 15px;
+            }
+            .profile-header {
+                padding: 30px 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-container">
+        <div class="profile-header">
+            <div class="profile-img-box">
+                <!-- GANTI URL INI dengan foto favorit Hwang Minhyun -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hwang_Min-hyun_in_Nov_2022.jpg/800px-Hwang_Min-hyun_in_Nov_2022.jpg" alt="Hwang Minhyun">
+            </div>
+            <h1>Hwang Minhyun</h1>
+            <p>Singer & Actor (황민현)</p>
+        </div>
+
+        <div class="nav-menu">
+            <button class="nav-btn active" onclick="switchTab(event, 'biodata')">Biodata</button>
+            <button class="nav-btn" onclick="switchTab(event, 'filmography')">Film & Drama</button>
+            <button class="nav-btn" onclick="switchTab(event, 'gallery')">Galeri Foto</button>
+            <button class="nav-btn" onclick="switchTab(event, 'hobbies')">Hobi & Minat</button>
+        </div>
+
+        <div class="content-body">
+            <!-- Biodata -->
+            <div id="biodata" class="tab-content active">
+                <h2 class="section-title">✨ Informasi Pribadi</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <span>Nama Lengkap</span>
+                        <p>Hwang Min-hyun (황민현)</p>
+                    </div>
+                    <div class="info-card">
+                        <span>Tanggal Lahir</span>
+                        <p>9 Agustus 1995</p>
+                    </div>
+                    <div class="info-card">
+                        <span>Tempat Lahir</span>
+                        <p>Busan, Korea Selatan</p>
+                    </div>
+                    <div class="info-card">
+                        <span>Agensi</span>
+                        <p>Pledis Entertainment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Film & Drama -->
+            <div id="filmography" class="tab-content">
+                <h2 class="section-title">🎬 Kumpulan Drama & Film</h2>
+                <div class="movies-grid">
+                    <div class="movie-card">
+                        <!-- Ganti src dengan poster Study Group -->
+                        <img class="movie-img" src="https://picsum.photos/seed/studygroup/400/300" alt="Study Group">
+                        <div class="movie-info">
+                            <h3>Study Group (2025)</h3>
+                            <p>Berperan sebagai Yoon Ga-min, siswa teladan dengan sisi petarung yang kuat.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <!-- Ganti src dengan poster My Lovely Liar -->
+                        <img class="movie-img" src="https://picsum.photos/seed/mylovelyliar/400/300" alt="My Lovely Liar">
+                        <div class="movie-info">
+                            <h3>My Lovely Liar (2023)</h3>
+                            <p>Berperan sebagai Kim Do-ha, produser musik jenius yang misterius.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <!-- Ganti src dengan poster Alchemy of Souls -->
+                        <img class="movie-img" src="https://picsum.photos/seed/alchemyofsouls/400/300" alt="Alchemy of Souls">
+                        <div class="movie-info">
+                            <h3>Alchemy of Souls (2022-2023)</h3>
+                            <p>Berperan sebagai Seo Yul, bangsawan dari keluarga Seo yang cerdas.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <!-- Ganti src dengan poster Live On -->
+                        <img class="movie-img" src="https://picsum.photos/seed/liveon/400/300" alt="Live On">
+                        <div class="movie-info">
+                            <h3>Live On (2020)</h3>
+                            <p>Berperan sebagai Go Eun-taek, ketua klub penyiaran sekolah yang perfeksionis.</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top:15px; color:#94a3b8; font-size:0.8rem;">💡 <strong>Tips:</strong> Ganti gambar placeholder dengan poster asli dari Google Images atau situs drama.</p>
+            </div>
+
+            <!-- Galeri -->
+            <div id="gallery" class="tab-content">
+                <h2 class="section-title">📸 Galeri Foto Eksklusif</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <!-- Ganti dengan foto Hwang Minhyun yang lain -->
+                        <img src="https://picsum.photos/seed/hwang1/400/400" alt="Hwang Minhyun 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/seed/hwang2/400/400" alt="Hwang Minhyun 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://picsum.photos/seed/hwang3/400/400" alt="Hwang Minhyun 3">
+                    </div>
+                </div>
+                <p style="margin-top:15px; color:#94a3b8; font-size:0.8rem;">💡 Ganti dengan foto asli dari fansite atau media sosial.</p>
+            </div>
+
+            <!-- Hobi -->
+            <div id="hobbies" class="tab-content">
+                <h2 class="section-title">🎯 Hobi & Aktivitas</h2>
+                <div class="hobby-list">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">🧹</div>
+                        <div class="hobby-details">
+                            <h3>Kebersihan & Merapikan Rumah</h3>
+                            <p>Dikenal sebagai idol yang sangat rapi dan hobi membersihkan ruangan (cleaning mania).</p>
+                        </div>
+                    </div>
+                    <div class="hobby-item">
+                        <div class="hobby-icon">🎧</div>
+                        <div class="hobby-details">
+                            <h3>Mendengarkan Musik & Fotografi</h3>
+                            <p>Suka menikmati berbagai genre musik ballad dan mengabadikan momen pemandangan estetis.</p>
+                        </div>
+                    </div>
+                    <div class="hobby-item">
+                        <div class="hobby-icon">🏋️‍♂️</div>
+                        <div class="hobby-details">
+                            <h3>Berolahraga & Fitness</h3>
+                            <p>Menjaga kesehatan tubuh dan kebugaran fisik melalui rutinitas gym secara teratur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Aesthetic KDrama Style • Created for Hwang Minhyun Fans</p>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
