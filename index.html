@@ -3,349 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hwang Minhyun | Special Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Hwang Minhyun | Ultimate Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.4s, color 0.4s, border-color 0.4s;
+        }
+
+        :root {
+            --bg: #0b0b1a;
+            --glass: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #f0f4ff;
+            --subtext: #a0b3d9;
+            --card: rgba(255, 255, 255, 0.04);
+            --shadow: rgba(0, 0, 0, 0.6);
+            --glow: #6366f1;
+            --glow2: #ec4899;
+        }
+
+        body.light {
+            --bg: #f2f6ff;
+            --glass: rgba(255, 255, 255, 0.5);
+            --border: rgba(0, 0, 0, 0.12);
+            --text: #111827;
+            --subtext: #4b5563;
+            --card: rgba(0, 0, 0, 0.04);
+            --shadow: rgba(0, 0, 0, 0.15);
+            --glow: #4f46e5;
+            --glow2: #db2777;
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b, #31103f);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #f8fafc;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        /* Orbs */
         .orb {
-            position: absolute;
-            width: 350px;
-            height: 350px;
+            position: fixed;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.5;
-            animation: floatOrb 10s infinite alternate ease-in-out;
+            filter: blur(100px);
+            opacity: 0.25;
+            z-index: 0;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+            pointer-events: none;
         }
-        .orb-1 { background: #818cf8; top: 10%; left: 15%; }
-        .orb-2 { background: #f43f5e; bottom: 10%; right: 15%; animation-delay: 5s; }
-
+        .orb-1 { background: var(--glow); top: -10%; left: -10%; }
+        .orb-2 { background: var(--glow2); bottom: -10%; right: -10%; animation-delay: 6s; }
         @keyframes floatOrb {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-30px) scale(1.1); }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.2); }
         }
 
+        /* Main Container */
         .glass-container {
+            max-width: 1000px;
             width: 100%;
-            max-width: 850px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            background: var(--glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 1;
             overflow: hidden;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 0.8s ease-out;
         }
-
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Header dengan kontrol */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--subtext);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .lang-btn.active {
+            background: var(--glow);
+            border-color: var(--glow);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(99,102,241,0.3);
+        }
+        .lang-btn:hover { transform: scale(1.05); }
+
+        .theme-toggle {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .theme-toggle:hover { background: var(--glass); }
+
+        /* Profile Header */
         .profile-header {
-            padding: 40px 30px 20px;
+            padding: 30px 30px 10px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-
         .profile-img-box {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 16px;
             border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            padding: 5px;
+            background: linear-gradient(135deg, var(--glow), var(--glow2));
+            box-shadow: 0 12px 30px rgba(99,102,241,0.4);
         }
-
         .profile-img-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.1);
         }
-
         .profile-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
-            margin-bottom: 5px;
-            background: linear-gradient(to right, #fff, #cbd5e1);
+            background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .profile-header p {
-            font-size: 0.9rem;
-            color: #94a3b8;
+        .profile-header .sub {
+            font-size: 1rem;
+            color: var(--subtext);
+            font-weight: 400;
+            margin-top: 4px;
+            -webkit-text-fill-color: var(--subtext);
         }
 
+        /* Nav Angka */
         .nav-menu {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.15);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--border);
             flex-wrap: wrap;
         }
-
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--subtext);
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(5px);
+            transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-
+        .nav-btn .num {
+            display: inline-block;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
+            background: var(--glass);
+            color: var(--text);
             transform: translateY(-2px);
         }
-
         .nav-btn.active {
-            background: linear-gradient(135deg, #6366f1, #ec4899);
+            background: linear-gradient(135deg, var(--glow), var(--glow2));
             border-color: transparent;
             color: #fff;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
             transform: translateY(-2px);
         }
-
-        .content-body {
-            padding: 35px 30px;
-            min-height: 320px;
+        .nav-btn.active .num {
+            background: rgba(255,255,255,0.2);
         }
 
+        /* Content */
+        .content-body {
+            padding: 30px 28px 40px;
+            min-height: 380px;
+        }
         .tab-content {
             display: none;
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(12px);
             transition: all 0.4s ease;
         }
-
         .tab-content.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
 
-        h2.section-title {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #f1f5f9;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            color: var(--text);
         }
+        .section-title span { background: linear-gradient(135deg, var(--glow), var(--glow2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
+        /* Grids */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 18px;
         }
-
         .info-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 20px;
-            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 18px 20px;
+            border-radius: 18px;
             transition: 0.3s;
         }
+        .info-card:hover { transform: translateY(-4px); border-color: var(--glow); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .info-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--glow); font-weight: 700; }
+        .info-card .value { font-size: 1.05rem; font-weight: 600; margin-top: 6px; color: var(--text); }
 
-        .info-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-        }
-
-        .info-card span {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #818cf8;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .info-card p {
-            font-size: 1rem;
-            color: #e2e8f0;
-            font-weight: 500;
-        }
-
-        .movies-grid {
+        .movie-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 24px;
         }
-
         .movie-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             overflow: hidden;
             transition: 0.3s;
             display: flex;
             flex-direction: column;
         }
-
-        .movie-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .movie-img {
+        .movie-card:hover { transform: translateY(-8px); border-color: var(--glow); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .movie-card img {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .movie-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            flex-grow: 1;
-        }
-
-        .movie-info h3 {
-            font-size: 0.95rem;
-            color: #fff;
-        }
-
-        .movie-info p {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            border-radius: 14px;
-            overflow: hidden;
             height: 200px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: 0.4s;
+            border-bottom: 1px solid var(--border);
         }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
+        .movie-card .info {
+            padding: 16px;
+            flex:1;
         }
+        .movie-card .info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .movie-card .info .role { font-size: 0.8rem; color: var(--glow); font-weight: 600; }
+        .movie-card .info .desc { font-size: 0.85rem; color: var(--subtext); margin-top: 8px; line-height: 1.4; }
 
-        .gallery-item:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        .hobby-list {
+        /* Music section */
+        .music-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
-
-        .hobby-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+        .music-item {
+            background: var(--card);
+            border: 1px solid var(--border);
             padding: 16px 20px;
-            border-radius: 14px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
             transition: 0.3s;
         }
+        .music-item:hover { border-color: var(--glow); transform: translateX(6px); }
+        .music-item .icon { font-size: 1.6rem; background: rgba(99,102,241,0.12); padding: 10px; border-radius: 14px; }
+        .music-item .detail h4 { font-weight: 700; font-size: 1rem; }
+        .music-item .detail p { font-size: 0.8rem; color: var(--subtext); }
 
-        .hobby-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateX(5px);
+        /* Hobi baru */
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 18px;
         }
-
-        .hobby-icon {
-            font-size: 1.3rem;
-            background: rgba(99, 102, 241, 0.15);
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .hobby-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+            transition: 0.3s;
         }
+        .hobby-card:hover { transform: translateY(-6px); border-color: var(--glow2); }
+        .hobby-card .emoji { font-size: 2.6rem; margin-bottom: 8px; }
+        .hobby-card h4 { font-weight: 700; }
+        .hobby-card p { font-size: 0.8rem; color: var(--subtext); margin-top: 4px; }
 
-        .hobby-details h3 {
-            font-size: 0.95rem;
-            color: #fff;
-            margin-bottom: 3px;
-        }
-
-        .hobby-details p {
-            font-size: 0.82rem;
-            color: #94a3b8;
-        }
-
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 15px;
+            padding: 14px;
             font-size: 0.75rem;
-            color: #64748b;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(0, 0, 0, 0.1);
+            color: var(--subtext);
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,0.05);
         }
 
-        @media(max-width: 600px) {
-            .glass-container {
-                margin: 10px;
-                border-radius: 18px;
-            }
-            .content-body {
-                padding: 20px 15px;
-            }
-            .profile-header {
-                padding: 30px 20px 15px;
-            }
+        /* Responsive */
+        @media(max-width:600px) {
+            .top-bar { flex-direction: column; align-items: stretch; padding: 12px 16px; }
+            .lang-switch { justify-content: center; }
+            .theme-toggle { justify-content: center; }
+            .profile-header { padding: 20px 16px 0; }
+            .profile-header h1 { font-size: 1.6rem; }
+            .nav-btn { padding: 8px 14px; font-size: 0.8rem; }
+            .content-body { padding: 20px 16px; }
         }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--glow); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -353,145 +373,323 @@
     <div class="orb orb-2"></div>
 
     <div class="glass-container">
+        <!-- Top bar: language + theme -->
+        <div class="top-bar">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="id">🇮🇩 ID</button>
+                <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="ko">🇰🇷 KO</button>
+                <button class="lang-btn" data-lang="zh">🇨🇳 中文</button>
+                <button class="lang-btn" data-lang="ja">🇯🇵 日本語</button>
+            </div>
+            <div class="theme-toggle" id="themeToggle">🌓 Mode</div>
+        </div>
+
+        <!-- Profile -->
         <div class="profile-header">
             <div class="profile-img-box">
-                <!-- GANTI URL INI dengan foto favorit Hwang Minhyun -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hwang_Min-hyun_in_Nov_2022.jpg/800px-Hwang_Min-hyun_in_Nov_2022.jpg" alt="Hwang Minhyun">
             </div>
-            <h1>Hwang Minhyun</h1>
-            <p>Singer & Actor (황민현)</p>
+            <h1 data-key="name">Hwang Minhyun</h1>
+            <div class="sub" data-key="subtitle">Singer & Actor (황민현)</div>
         </div>
 
+        <!-- Nav Angka -->
         <div class="nav-menu">
-            <button class="nav-btn active" onclick="switchTab(event, 'biodata')">Biodata</button>
-            <button class="nav-btn" onclick="switchTab(event, 'filmography')">Film & Drama</button>
-            <button class="nav-btn" onclick="switchTab(event, 'gallery')">Galeri Foto</button>
-            <button class="nav-btn" onclick="switchTab(event, 'hobbies')">Hobi & Minat</button>
+            <button class="nav-btn active" data-tab="tab1"><span class="num">1</span> <span data-key="nav1">Profil</span></button>
+            <button class="nav-btn" data-tab="tab2"><span class="num">2</span> <span data-key="nav2">Drama & Film</span></button>
+            <button class="nav-btn" data-tab="tab3"><span class="num">3</span> <span data-key="nav3">Musik</span></button>
+            <button class="nav-btn" data-tab="tab4"><span class="num">4</span> <span data-key="nav4">Hobi</span></button>
         </div>
 
+        <!-- Content -->
         <div class="content-body">
-            <!-- Biodata -->
-            <div id="biodata" class="tab-content active">
-                <h2 class="section-title">✨ Informasi Pribadi</h2>
+            <!-- TAB 1: Profil -->
+            <div id="tab1" class="tab-content active">
+                <div class="section-title"><span>✦</span> <span data-key="bio_title">Informasi Pribadi</span></div>
                 <div class="info-grid">
-                    <div class="info-card">
-                        <span>Nama Lengkap</span>
-                        <p>Hwang Min-hyun (황민현)</p>
-                    </div>
-                    <div class="info-card">
-                        <span>Tanggal Lahir</span>
-                        <p>9 Agustus 1995</p>
-                    </div>
-                    <div class="info-card">
-                        <span>Tempat Lahir</span>
-                        <p>Busan, Korea Selatan</p>
-                    </div>
-                    <div class="info-card">
-                        <span>Agensi</span>
-                        <p>Pledis Entertainment</p>
-                    </div>
+                    <div class="info-card"><div class="label" data-key="label_name">Nama Lengkap</div><div class="value" data-key="fullname">Hwang Min-hyun</div></div>
+                    <div class="info-card"><div class="label" data-key="label_birth">Tanggal Lahir</div><div class="value" data-key="birth">9 Agustus 1995</div></div>
+                    <div class="info-card"><div class="label" data-key="label_place">Tempat Lahir</div><div class="value" data-key="place">Busan, Korea Selatan</div></div>
+                    <div class="info-card"><div class="label" data-key="label_agency">Agensi</div><div class="value" data-key="agency">Pledis Entertainment</div></div>
+                    <div class="info-card"><div class="label" data-key="label_group">Group</div><div class="value" data-key="group">NU'EST, Wanna One</div></div>
+                    <div class="info-card"><div class="label" data-key="label_debut">Debut</div><div class="value" data-key="debut">2012 (NU'EST), 2017 (Wanna One)</div></div>
                 </div>
             </div>
 
-            <!-- Film & Drama -->
-            <div id="filmography" class="tab-content">
-                <h2 class="section-title">🎬 Kumpulan Drama & Film</h2>
-                <div class="movies-grid">
+            <!-- TAB 2: Drama & Film -->
+            <div id="tab2" class="tab-content">
+                <div class="section-title"><span>🎬</span> <span data-key="drama_title">Film & Drama</span></div>
+                <div class="movie-grid">
                     <div class="movie-card">
-                        <!-- Ganti src dengan poster Study Group -->
-                        <img class="movie-img" src="https://picsum.photos/seed/studygroup/400/300" alt="Study Group">
-                        <div class="movie-info">
+                        <img src="https://picsum.photos/seed/study/400/250" alt="Study Group">
+                        <div class="info">
                             <h3>Study Group (2025)</h3>
-                            <p>Berperan sebagai Yoon Ga-min, siswa teladan dengan sisi petarung yang kuat.</p>
+                            <div class="role" data-key="role1">Yoon Ga-min</div>
+                            <div class="desc" data-key="desc1">Siswa teladan yang ternyata memiliki kemampuan bertarung luar biasa. Berjuang melindungi teman-temannya di sekolah yang penuh kekerasan.</div>
                         </div>
                     </div>
                     <div class="movie-card">
-                        <!-- Ganti src dengan poster My Lovely Liar -->
-                        <img class="movie-img" src="https://picsum.photos/seed/mylovelyliar/400/300" alt="My Lovely Liar">
-                        <div class="movie-info">
+                        <img src="https://picsum.photos/seed/liar/400/250" alt="My Lovely Liar">
+                        <div class="info">
                             <h3>My Lovely Liar (2023)</h3>
-                            <p>Berperan sebagai Kim Do-ha, produser musik jenius yang misterius.</p>
+                            <div class="role" data-key="role2">Kim Do-ha</div>
+                            <div class="desc" data-key="desc2">Produser musik jenius yang misterius dan tertutup. Bertemu dengan seorang wanita yang bisa mendeteksi kebohongan, dan kisah cinta pun berkembang.</div>
                         </div>
                     </div>
                     <div class="movie-card">
-                        <!-- Ganti src dengan poster Alchemy of Souls -->
-                        <img class="movie-img" src="https://picsum.photos/seed/alchemyofsouls/400/300" alt="Alchemy of Souls">
-                        <div class="movie-info">
+                        <img src="https://picsum.photos/seed/alchemy/400/250" alt="Alchemy of Souls">
+                        <div class="info">
                             <h3>Alchemy of Souls (2022-2023)</h3>
-                            <p>Berperan sebagai Seo Yul, bangsawan dari keluarga Seo yang cerdas.</p>
+                            <div class="role" data-key="role3">Seo Yul</div>
+                            <div class="desc" data-key="desc3">Bangsawan dari keluarga Seo yang cerdas dan berprinsip. Terlibat dalam konflik politik dan magis di kerajaan fiksi Daeho.</div>
                         </div>
                     </div>
                     <div class="movie-card">
-                        <!-- Ganti src dengan poster Live On -->
-                        <img class="movie-img" src="https://picsum.photos/seed/liveon/400/300" alt="Live On">
-                        <div class="movie-info">
+                        <img src="https://picsum.photos/seed/liveon/400/250" alt="Live On">
+                        <div class="info">
                             <h3>Live On (2020)</h3>
-                            <p>Berperan sebagai Go Eun-taek, ketua klub penyiaran sekolah yang perfeksionis.</p>
+                            <div class="role" data-key="role4">Go Eun-taek</div>
+                            <div class="desc" data-key="desc4">Ketua klub penyiaran sekolah yang perfeksionis dan tegas. Membantu seorang siswi populer yang menyembunyikan identitasnya.</div>
                         </div>
                     </div>
                 </div>
-                <p style="margin-top:15px; color:#94a3b8; font-size:0.8rem;">💡 <strong>Tips:</strong> Ganti gambar placeholder dengan poster asli dari Google Images atau situs drama.</p>
             </div>
 
-            <!-- Galeri -->
-            <div id="gallery" class="tab-content">
-                <h2 class="section-title">📸 Galeri Foto Eksklusif</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <!-- Ganti dengan foto Hwang Minhyun yang lain -->
-                        <img src="https://picsum.photos/seed/hwang1/400/400" alt="Hwang Minhyun 1">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/hwang2/400/400" alt="Hwang Minhyun 2">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://picsum.photos/seed/hwang3/400/400" alt="Hwang Minhyun 3">
-                    </div>
+            <!-- TAB 3: Musik -->
+            <div id="tab3" class="tab-content">
+                <div class="section-title"><span>🎵</span> <span data-key="music_title">Diskografi & Lagu</span></div>
+                <div class="music-list">
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music1">NU'EST - "Hello" (2013)</h4><p data-key="music1d">Lagu debut yang melambungkan nama NU'EST dengan melodi pop yang fresh.</p></div></div>
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music2">NU'EST - "Love Paint" (2016)</h4><p data-key="music2d">Lagu dengan nuansa R&B yang sensual, menunjukkan kematangan musikal grup.</p></div></div>
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music3">Wanna One - "Energetic" (2017)</h4><p data-key="music3d">Debut single Wanna One yang langsung meledak di chart, penuh energi dan karisma.</p></div></div>
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music4">Wanna One - "Spring Breeze" (2018)</h4><p data-key="music4d">Lagu perpisahan yang emosional, menggambarkan kerinduan dan kebersamaan.</p></div></div>
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music5">Solo - "Universe" (2023)</h4><p data-key="music5d">Singel solo pertama Hwang Minhyun dengan balada pop yang menyentuh hati.</p></div></div>
+                    <div class="music-item"><div class="icon">🎤</div><div class="detail"><h4 data-key="music6">Solo - "Hidden Side" (2024)</h4><p data-key="music6d">Lagu dengan beat modern dan lirik tentang sisi gelap yang tersembunyi.</p></div></div>
                 </div>
-                <p style="margin-top:15px; color:#94a3b8; font-size:0.8rem;">💡 Ganti dengan foto asli dari fansite atau media sosial.</p>
             </div>
 
-            <!-- Hobi -->
-            <div id="hobbies" class="tab-content">
-                <h2 class="section-title">🎯 Hobi & Aktivitas</h2>
-                <div class="hobby-list">
-                    <div class="hobby-item">
-                        <div class="hobby-icon">🧹</div>
-                        <div class="hobby-details">
-                            <h3>Kebersihan & Merapikan Rumah</h3>
-                            <p>Dikenal sebagai idol yang sangat rapi dan hobi membersihkan ruangan (cleaning mania).</p>
-                        </div>
-                    </div>
-                    <div class="hobby-item">
-                        <div class="hobby-icon">🎧</div>
-                        <div class="hobby-details">
-                            <h3>Mendengarkan Musik & Fotografi</h3>
-                            <p>Suka menikmati berbagai genre musik ballad dan mengabadikan momen pemandangan estetis.</p>
-                        </div>
-                    </div>
-                    <div class="hobby-item">
-                        <div class="hobby-icon">🏋️‍♂️</div>
-                        <div class="hobby-details">
-                            <h3>Berolahraga & Fitness</h3>
-                            <p>Menjaga kesehatan tubuh dan kebugaran fisik melalui rutinitas gym secara teratur.</p>
-                        </div>
-                    </div>
+            <!-- TAB 4: Hobi Baru -->
+            <div id="tab4" class="tab-content">
+                <div class="section-title"><span>🎯</span> <span data-key="hobby_title">Hobi & Minat</span></div>
+                <div class="hobby-grid">
+                    <div class="hobby-card"><div class="emoji">📚</div><h4 data-key="hobby1">Membaca Buku</h4><p data-key="hobby1d">Suka membaca novel fiksi dan biografi tokoh inspiratif.</p></div>
+                    <div class="hobby-card"><div class="emoji">🎮</div><h4 data-key="hobby2">Bermain Game</h4><p data-key="hobby2d">Penggemar game strategi dan RPG, sering main bersama teman-teman.</p></div>
+                    <div class="hobby-card"><div class="emoji">✈️</div><h4 data-key="hobby3">Traveling</h4><p data-key="hobby3d">Suka menjelajahi tempat baru dan mengabadikan momen dengan kamera.</p></div>
+                    <div class="hobby-card"><div class="emoji">📸</div><h4 data-key="hobby4">Fotografi</h4><p data-key="hobby4d">Hobi memotret pemandangan alam dan potret orang-orang di sekitarnya.</p></div>
+                    <div class="hobby-card"><div class="emoji">🧘</div><h4 data-key="hobby5">Meditasi</h4><p data-key="hobby5d">Meluangkan waktu untuk relaksasi dan menjaga keseimbangan batin.</p></div>
+                    <div class="hobby-card"><div class="emoji">🍳</div><h4 data-key="hobby6">Memasak</h4><p data-key="hobby6d">Eksperimen resep masakan Korea dan internasional di waktu luang.</p></div>
                 </div>
             </div>
         </div>
 
-        <div class="footer">
-            <p>Aesthetic KDrama Style • Created for Hwang Minhyun Fans</p>
-        </div>
+        <div class="footer">✨ Hwang Minhyun Ultimate Profile • dibuat dengan cinta</div>
     </div>
 
     <script>
-        function switchTab(event, tabId) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+        // ========== DATA MULTI BAHASA ==========
+        const translations = {
+            id: {
+                name: "Hwang Minhyun", subtitle: "Singer & Actor (황민현)",
+                nav1: "Profil", nav2: "Drama & Film", nav3: "Musik", nav4: "Hobi",
+                bio_title: "Informasi Pribadi",
+                label_name: "Nama Lengkap", fullname: "Hwang Min-hyun",
+                label_birth: "Tanggal Lahir", birth: "9 Agustus 1995",
+                label_place: "Tempat Lahir", place: "Busan, Korea Selatan",
+                label_agency: "Agensi", agency: "Pledis Entertainment",
+                label_group: "Group", group: "NU'EST, Wanna One",
+                label_debut: "Debut", debut: "2012 (NU'EST), 2017 (Wanna One)",
+                drama_title: "Film & Drama",
+                role1: "Yoon Ga-min", desc1: "Siswa teladan yang ternyata memiliki kemampuan bertarung luar biasa. Berjuang melindungi teman-temannya di sekolah yang penuh kekerasan.",
+                role2: "Kim Do-ha", desc2: "Produser musik jenius yang misterius dan tertutup. Bertemu dengan seorang wanita yang bisa mendeteksi kebohongan, dan kisah cinta pun berkembang.",
+                role3: "Seo Yul", desc3: "Bangsawan dari keluarga Seo yang cerdas dan berprinsip. Terlibat dalam konflik politik dan magis di kerajaan fiksi Daeho.",
+                role4: "Go Eun-taek", desc4: "Ketua klub penyiaran sekolah yang perfeksionis dan tegas. Membantu seorang siswi populer yang menyembunyikan identitasnya.",
+                music_title: "Diskografi & Lagu",
+                music1: 'NU\'EST - "Hello" (2013)', music1d: "Lagu debut yang melambungkan nama NU'EST dengan melodi pop yang fresh.",
+                music2: 'NU\'EST - "Love Paint" (2016)', music2d: "Lagu dengan nuansa R&B yang sensual, menunjukkan kematangan musikal grup.",
+                music3: 'Wanna One - "Energetic" (2017)', music3d: "Debut single Wanna One yang langsung meledak di chart, penuh energi dan karisma.",
+                music4: 'Wanna One - "Spring Breeze" (2018)', music4d: "Lagu perpisahan yang emosional, menggambarkan kerinduan dan kebersamaan.",
+                music5: 'Solo - "Universe" (2023)', music5d: "Singel solo pertama Hwang Minhyun dengan balada pop yang menyentuh hati.",
+                music6: 'Solo - "Hidden Side" (2024)', music6d: "Lagu dengan beat modern dan lirik tentang sisi gelap yang tersembunyi.",
+                hobby_title: "Hobi & Minat",
+                hobby1: "Membaca Buku", hobby1d: "Suka membaca novel fiksi dan biografi tokoh inspiratif.",
+                hobby2: "Bermain Game", hobby2d: "Penggemar game strategi dan RPG, sering main bersama teman-teman.",
+                hobby3: "Traveling", hobby3d: "Suka menjelajahi tempat baru dan mengabadikan momen dengan kamera.",
+                hobby4: "Fotografi", hobby4d: "Hobi memotret pemandangan alam dan potret orang-orang di sekitarnya.",
+                hobby5: "Meditasi", hobby5d: "Meluangkan waktu untuk relaksasi dan menjaga keseimbangan batin.",
+                hobby6: "Memasak", hobby6d: "Eksperimen resep masakan Korea dan internasional di waktu luang."
+            },
+            en: {
+                name: "Hwang Minhyun", subtitle: "Singer & Actor (황민현)",
+                nav1: "Profile", nav2: "Drama & Film", nav3: "Music", nav4: "Hobbies",
+                bio_title: "Personal Information",
+                label_name: "Full Name", fullname: "Hwang Min-hyun",
+                label_birth: "Date of Birth", birth: "August 9, 1995",
+                label_place: "Birthplace", place: "Busan, South Korea",
+                label_agency: "Agency", agency: "Pledis Entertainment",
+                label_group: "Group", group: "NU'EST, Wanna One",
+                label_debut: "Debut", debut: "2012 (NU'EST), 2017 (Wanna One)",
+                drama_title: "Film & Drama",
+                role1: "Yoon Ga-min", desc1: "An exemplary student who turns out to have extraordinary fighting skills. Fights to protect his friends in a violent school.",
+                role2: "Kim Do-ha", desc2: "A mysterious and reserved music producer genius. Meets a woman who can detect lies, and a love story unfolds.",
+                role3: "Seo Yul", desc3: "A noble from the Seo family, intelligent and principled. Involved in political and magical conflicts in the fictional kingdom of Daeho.",
+                role4: "Go Eun-taek", desc4: "The perfectionist and strict head of the school broadcasting club. Helps a popular student hiding her identity.",
+                music_title: "Discography & Songs",
+                music1: 'NU\'EST - "Hello" (2013)', music1d: "Debut song that propelled NU'EST with fresh pop melodies.",
+                music2: 'NU\'EST - "Love Paint" (2016)', music2d: "A sensual R&B track showing the group's musical maturity.",
+                music3: 'Wanna One - "Energetic" (2017)', music3d: "Wanna One's debut single that exploded on charts, full of energy and charisma.",
+                music4: 'Wanna One - "Spring Breeze" (2018)', music4d: "An emotional farewell song, depicting longing and togetherness.",
+                music5: 'Solo - "Universe" (2023)', music5d: "Hwang Minhyun's first solo single with a touching pop ballad.",
+                music6: 'Solo - "Hidden Side" (2024)', music6d: "A modern beat track with lyrics about hidden dark sides.",
+                hobby_title: "Hobbies & Interests",
+                hobby1: "Reading Books", hobby1d: "Loves reading fiction novels and inspiring biographies.",
+                hobby2: "Playing Games", hobby2d: "Fan of strategy and RPG games, often plays with friends.",
+                hobby3: "Traveling", hobby3d: "Enjoys exploring new places and capturing moments with camera.",
+                hobby4: "Photography", hobby4d: "Hobby of photographing landscapes and portraits.",
+                hobby5: "Meditation", hobby5d: "Takes time for relaxation and maintaining inner balance.",
+                hobby6: "Cooking", hobby6d: "Experiments with Korean and international recipes in free time."
+            },
+            ko: {
+                name: "황민현", subtitle: "가수 & 배우 (황민현)",
+                nav1: "프로필", nav2: "드라마 & 영화", nav3: "음악", nav4: "취미",
+                bio_title: "개인 정보",
+                label_name: "전체 이름", fullname: "황민현",
+                label_birth: "생일", birth: "1995년 8월 9일",
+                label_place: "출생지", place: "부산, 대한민국",
+                label_agency: "소속사", agency: "플레디스 엔터테인먼트",
+                label_group: "그룹", group: "뉴이스트, 워너원",
+                label_debut: "데뷔", debut: "2012 (뉴이스트), 2017 (워너원)",
+                drama_title: "드라마 & 영화",
+                role1: "윤가민", desc1: "뛰어난 싸움 실력을 가진 모범생. 폭력적인 학교에서 친구들을 보호하기 위해 싸운다.",
+                role2: "김도하", desc2: "신비롭고 폐쇄적인 음악 프로듀서 천재. 거짓말을 감지할 수 있는 여자를 만나 사랑이 싹튼다.",
+                role3: "서율", desc3: "서가 출신의 귀족으로 똑똑하고 원칙주의자. 가상의 왕국 대호에서 정치적, 마법적 갈등에 휘말린다.",
+                role4: "고은택", desc4: "학교 방송부 회장으로 완벽주의자이고 엄격하다. 정체를 숨기는 인기 학생을 돕는다.",
+                music_title: "디스코그래피 & 노래",
+                music1: '뉴이스트 - "Hello" (2013)', music1d: "신선한 팝 멜로디로 뉴이스트를 알린 데뷔곡.",
+                music2: '뉴이스트 - "Love Paint" (2016)', music2d: "그룹의 음악적 성숙함을 보여주는 감각적인 R&B 곡.",
+                music3: '워너원 - "Energetic" (2017)', music3d: "차트를 폭발시킨 워너원의 데뷔 싱글, 에너지와 카리스마가 넘친다.",
+                music4: '워너원 - "Spring Breeze" (2018)', music4d: "그리움과 동지를 담은 감동적인 이별 노래.",
+                music5: '솔로 - "Universe" (2023)', music5d: "황민현의 첫 솔로 싱글, 감동적인 팝 발라드.",
+                music6: '솔로 - "Hidden Side" (2024)', music6d: "숨겨진 어두운 면을 다룬 현대적인 비트의 곡.",
+                hobby_title: "취미 & 관심사",
+                hobby1: "독서", hobby1d: "소설과 영감을 주는 전기 읽기를 좋아한다.",
+                hobby2: "게임", hobby2d: "전략 및 RPG 게임 팬이며 친구들과 자주 즐긴다.",
+                hobby3: "여행", hobby3d: "새로운 장소를 탐험하고 카메라로 순간을 담는 것을 즐긴다.",
+                hobby4: "사진", hobby4d: "풍경과 인물 사진을 찍는 취미가 있다.",
+                hobby5: "명상", hobby5d: "휴식과 내면의 평형을 유지하는 시간을 갖는다.",
+                hobby6: "요리", hobby6d: "여가 시간에 한국 및 국제 요리를 실험한다."
+            },
+            zh: {
+                name: "黄旼炫", subtitle: "歌手 & 演员 (황민현)",
+                nav1: "简介", nav2: "电视剧 & 电影", nav3: "音乐", nav4: "爱好",
+                bio_title: "个人信息",
+                label_name: "全名", fullname: "黄旼炫",
+                label_birth: "出生日期", birth: "1995年8月9日",
+                label_place: "出生地", place: "釜山, 韩国",
+                label_agency: "经纪公司", agency: "Pledis娱乐",
+                label_group: "组合", group: "NU'EST, Wanna One",
+                label_debut: "出道", debut: "2012年 (NU'EST), 2017年 (Wanna One)",
+                drama_title: "电视剧 & 电影",
+                role1: "尹佳民", desc1: "模范生，但其实拥有非凡的战斗能力。在充满暴力的学校里保护朋友。",
+                role2: "金道河", desc2: "神秘而封闭的音乐制作人天才。遇到能识别谎言的女人后，爱情萌芽。",
+                role3: "徐律", desc3: "徐氏家族的贵族，聪明且讲原则。卷入虚构王国大湖的政治和魔法冲突。",
+                role4: "高恩泽", desc4: "学校广播部会长，完美主义且严格。帮助隐藏身份的人气学生。",
+                music_title: "音乐作品 & 歌曲",
+                music1: 'NU\'EST - "Hello" (2013)', music1d: "以新鲜流行旋律让NU'EST名声大噪的出道曲。",
+                music2: 'NU\'EST - "Love Paint" (2016)', music2d: "展现组合音乐成熟度的感性R&B歌曲。",
+                music3: 'Wanna One - "Energetic" (2017)', music3d: "Wanna One出道单曲，充满能量和魅力，席卷榜单。",
+                music4: 'Wanna One - "Spring Breeze" (2018)', music4d: "充满思念和团结的感人离别歌曲。",
+                music5: 'Solo - "Universe" (2023)', music5d: "黄旼炫第一首个人单曲，感人至深的流行民谣。",
+                music6: 'Solo - "Hidden Side" (2024)', music6d: "关于隐藏黑暗面的现代节奏歌曲。",
+                hobby_title: "爱好与兴趣",
+                hobby1: "阅读", hobby1d: "喜欢阅读小说和鼓舞人心的传记。",
+                hobby2: "玩游戏", hobby2d: "喜欢策略和RPG游戏，经常和朋友一起玩。",
+                hobby3: "旅行", hobby3d: "喜欢探索新地方并用相机记录瞬间。",
+                hobby4: "摄影", hobby4d: "爱好拍摄风景和人像。",
+                hobby5: "冥想", hobby5d: "花时间放松和保持内心平衡。",
+                hobby6: "烹饪", hobby6d: "在空闲时间尝试韩国和国际食谱。"
+            },
+            ja: {
+                name: "ファン・ミンヒョン", subtitle: "歌手 & 俳優 (황민현)",
+                nav1: "プロフィール", nav2: "ドラマ & 映画", nav3: "音楽", nav4: "趣味",
+                bio_title: "個人情報",
+                label_name: "フルネーム", fullname: "ファン・ミンヒョン",
+                label_birth: "生年月日", birth: "1995年8月9日",
+                label_place: "出身地", place: "釜山, 韓国",
+                label_agency: "所属事務所", agency: "Pledisエンターテインメント",
+                label_group: "グループ", group: "NU'EST, Wanna One",
+                label_debut: "デビュー", debut: "2012年 (NU'EST), 2017年 (Wanna One)",
+                drama_title: "ドラマ & 映画",
+                role1: "ユン・ガミン", desc1: "模範生だが、実は卓越した戦闘能力を持つ。暴力的な学校で友達を守るために戦う。",
+                role2: "キム・ドハ", desc2: "神秘的な天才音楽プロデューサー。嘘を見抜ける女性と出会い、恋が芽生える。",
+                role3: "ソ・ユル", desc3: "ソ家の貴族で、賢くて信念を持っている。架空の王国・大湖で政治的・魔法的な争いに巻き込まれる。",
+                role4: "コ・ウンテク", desc4: "学校の放送部部長で完璧主義者で厳しい。正体を隠す人気生徒を助ける。",
+                music_title: "ディスコグラフィー & 曲",
+                music1: 'NU\'EST - "Hello" (2013)', music1d: "フレッシュなポップメロディーでNU'ESTの名を轟かせたデビュー曲。",
+                music2: 'NU\'EST - "Love Paint" (2016)', music2d: "グループの音楽的成熟を示す官能的なR&B曲。",
+                music3: 'Wanna One - "Energetic" (2017)', music3d: "チャートを爆発させたWanna Oneのデビューシングル、エネルギーとカリスマにあふれる。",
+                music4: 'Wanna One - "Spring Breeze" (2018)', music4d: "切なさと団結を描いた感動的な別れの歌。",
+                music5: 'Solo - "Universe" (2023)', music5d: "ファン・ミンヒョンの初のソロシングル、感動的なポップバラード。",
+                music6: 'Solo - "Hidden Side" (2024)', music6d: "隠された暗い側面をテーマにしたモダンビートの曲。",
+                hobby_title: "趣味と関心",
+                hobby1: "読書", hobby1d: "小説や感動的な伝記を読むのが好き。",
+                hobby2: "ゲーム", hobby2d: "戦略やRPGゲームのファンで、友達とよく遊ぶ。",
+                hobby3: "旅行", hobby3d: "新しい場所を探検し、カメラで瞬間を切り取るのが好き。",
+                hobby4: "写真", hobby4d: "風景やポートレートを撮るのが趣味。",
+                hobby5: "瞑想", hobby5d: "リラックスして内面のバランスを保つ時間を持つ。",
+                hobby6: "料理", hobby6d: "余暇に韓国料理や国際料理を試す。"
+            }
+        };
+
+        // ========== FUNGSI GANTI BAHASA ==========
+        let currentLang = 'id';
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (t[key] !== undefined) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = t[key];
+                    } else {
+                        el.textContent = t[key];
+                    }
+                }
+            });
+            // update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            currentLang = lang;
         }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                applyLanguage(this.dataset.lang);
+            });
+        });
+
+        // ========== TOGGLE DARK/LIGHT ==========
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light');
+            this.textContent = document.body.classList.contains('light') ? '🌙 Mode' : '🌓 Mode';
+        });
+
+        // ========== TAB NAVIGASI ANGKA ==========
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // hapus active semua
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                // aktifkan yang dipilih
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ========== SET DEFAULT BAHASA ==========
+        applyLanguage('id');
     </script>
 </body>
 </html>
